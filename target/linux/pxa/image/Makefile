@@ -7,8 +7,15 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+CUSTOM_MODULES=$(TOPDIR)/files/lib/modules/
+
 define Image/Prepare
+#	echo Image/Prepare/TARGET_DIR: $(TARGET_DIR)
+	rm -rf $(TARGET_DIR)/lib/modules/*
+	cp -r $(CUSTOM_MODULES) $(TARGET_DIR)/lib/
 	cp $(LINUX_DIR)/arch/arm/boot/uImage $(KDIR)/uImage
+	
+#	read -n 1 -p "....press any key to continue"
 endef
 
 define Image/BuildKernel
